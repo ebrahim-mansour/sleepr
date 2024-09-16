@@ -1,3 +1,4 @@
+import { UserDocument } from '@app/common';
 import {
   Injectable,
   UnauthorizedException,
@@ -6,7 +7,6 @@ import {
 import * as bcrypt from 'bcryptjs';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GetUserDto } from './dto/get-user.dto';
-import { UserDocument } from './models/user.schema';
 import { UsersRepository } from './users.repository';
 
 @Injectable()

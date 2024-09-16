@@ -13,10 +13,4 @@ describe('PaymentsController', () => {
 
     paymentsController = app.get<PaymentsController>(PaymentsController);
   });
-
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(paymentsController.getHello()).toBe('Hello World!');
-    });
-  });
 });
