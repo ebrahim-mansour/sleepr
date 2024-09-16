@@ -70,3 +70,6 @@ steps:
         'push',
         'africa-south1-docker.pkg.dev/testing-purposes-230609/payments/production',
       ]
+
+options:
+  logging: NONE
