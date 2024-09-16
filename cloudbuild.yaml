@@ -1,0 +1,72 @@
+steps:
+  # Reservations
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/reservations/production',
+        '-f',
+        'apps/reservations/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/reservations/production',
+      ]
+
+  # Auth
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/auth/production',
+        '-f',
+        'apps/auth/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/auth/production',
+      ]
+
+  # Notifications
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/notifications/production',
+        '-f',
+        'apps/notifications/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/notifications/production',
+      ]
+
+  # Payments
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/payments/production',
+        '-f',
+        'apps/payments/Dockerfile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'africa-south1-docker.pkg.dev/testing-purposes-230609/payments/production',
+      ]
