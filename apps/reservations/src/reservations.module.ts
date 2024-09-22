@@ -1,6 +1,7 @@
 import {
   AUTH_SERVICE,
   DatabaseModule,
+  HealthModule,
   LoggerModule,
   PAYMENTS_SERVICE,
 } from '@app/common';
@@ -62,6 +63,7 @@ import { ReservationsService } from './reservations.service';
         inject: [ConfigService],
       },
     ]),
+    HealthModule,
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],
