@@ -15,7 +15,7 @@ spec:
         app: reservations
     spec:
       containers:
-        - image: africa-south1-docker.pkg.dev/testing-purposes-230609/reservations/production
+        - image: 390402563935.dkr.ecr.us-east-1.amazonaws.com/reservations:latest # GCP image # africa-south1-docker.pkg.dev/testing-purposes-230609/reservations/production
           name: reservations
           env:
             - name: MONGODB_URI

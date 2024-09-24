@@ -15,7 +15,7 @@ spec:
         app: notifications
     spec:
       containers:
-        - image: africa-south1-docker.pkg.dev/testing-purposes-230609/notifications/production
+        - image: 390402563935.dkr.ecr.us-east-1.amazonaws.com/notifications:latest # GCP image # africa-south1-docker.pkg.dev/testing-purposes-230609/notifications/production
           name: notifications
           env:
             - name: PORT

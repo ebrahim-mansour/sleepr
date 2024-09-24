@@ -15,7 +15,7 @@ spec:
         app: auth
     spec:
       containers:
-        - image: africa-south1-docker.pkg.dev/testing-purposes-230609/auth/production
+        - image: 390402563935.dkr.ecr.us-east-1.amazonaws.com/auth:latest # GCP image # africa-south1-docker.pkg.dev/testing-purposes-230609/auth/production
           name: auth
           env:
             - name: MONGODB_URI
