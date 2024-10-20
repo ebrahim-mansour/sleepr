@@ -1,6 +1,7 @@
 import { UserDocument } from '@app/common';
 import {
   Injectable,
+  Logger,
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
@@ -11,12 +12,15 @@ import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
+  private readonly logger = new Logger(UsersService.name);
+
   constructor(private readonly usersRepository: UsersRepository) {}
 
   private async validateCreateUserDto(createUserDto: CreateUserDto) {
     try {
       await this.usersRepository.findOne({ email: createUserDto.email });
     } catch (error) {
+      this.logger.error(error);
       return;
     }
     throw new UnprocessableEntityException('Email already exists');
