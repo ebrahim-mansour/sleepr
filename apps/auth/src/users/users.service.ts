@@ -1,6 +1,7 @@
-import { UserDocument } from '@app/common';
+import { Role, User } from '@app/common';
 import {
   Injectable,
+  Logger,
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
@@ -11,23 +12,28 @@ import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
+  private readonly logger = new Logger(UsersService.name);
+
   constructor(private readonly usersRepository: UsersRepository) {}
 
-  private async validateCreateUserDto(createUserDto: CreateUserDto) {
+  private async validateCreateUser(createUserDto: CreateUserDto) {
     try {
       await this.usersRepository.findOne({ email: createUserDto.email });
     } catch (error) {
+      this.logger.error(error);
       return;
     }
     throw new UnprocessableEntityException('Email already exists');
   }
 
   async create(createUserDto: CreateUserDto) {
-    await this.validateCreateUserDto(createUserDto);
-    return this.usersRepository.create({
+    await this.validateCreateUser(createUserDto);
+    const user = new User({
       ...createUserDto,
       password: await bcrypt.hash(createUserDto.password, 10),
+      roles: createUserDto.roles?.map((roleDto) => new Role(roleDto)),
     });
+    return this.usersRepository.create(user);
   }
 
   async verifyUser(email: string, password: string) {
@@ -38,7 +44,7 @@ export class UsersService {
     return user;
   }
 
-  async getUser(getUserDto: GetUserDto): Promise<UserDocument> {
-    return this.usersRepository.findOne(getUserDto);
+  async getUser(getUserDto: GetUserDto): Promise<User> {
+    return this.usersRepository.findOne(getUserDto, { roles: true });
   }
 }
