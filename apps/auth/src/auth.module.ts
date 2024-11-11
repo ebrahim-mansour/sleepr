@@ -1,6 +1,8 @@
 import { HealthModule, LoggerModule } from '@app/common';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GraphQLModule } from '@nestjs/graphql';
 import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
 import { AuthController } from './auth.controller';
@@ -11,6 +13,12 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: {
+        federation: 2,
+      },
+    }),
     UsersModule,
     LoggerModule,
     ConfigModule.forRoot({

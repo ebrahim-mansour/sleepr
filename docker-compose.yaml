@@ -1,6 +1,6 @@
 services:
   reservations:
-    build: 
+    build:
       context: .
       dockerfile: ./apps/reservations/Dockerfile
       target: development
@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/usr/src/app
   auth:
-    build: 
+    build:
       context: .
       dockerfile: ./apps/auth/Dockerfile
       target: development
@@ -26,7 +26,7 @@ services:
     volumes:
       - .:/usr/src/app
   payments:
-    build: 
+    build:
       context: .
       dockerfile: ./apps/payments/Dockerfile
       target: development
@@ -36,7 +36,7 @@ services:
     volumes:
       - .:/usr/src/app
   notifications:
-    build: 
+    build:
       context: .
       dockerfile: ./apps/notifications/Dockerfile
       target: development
@@ -45,5 +45,17 @@ services:
       - ./apps/notifications/.env
     volumes:
       - .:/usr/src/app
+  gateway:
+    build:
+      context: .
+      dockerfile: ./apps/gateway/Dockerfile
+      target: development
+    command: pnpm run start:dev gateway
+    env_file:
+      - ./apps/gateway/.env
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - '3004:3004'
   mongo:
     image: mongo
